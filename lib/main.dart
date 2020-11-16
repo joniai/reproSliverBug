@@ -88,53 +88,26 @@ class _MyHomePageState extends State<MyHomePage> {
       );
     }
 
-    return GestureDetector(
-      onTap: () {},
-      child: NotificationListener<ScrollEndNotification>(
-        onNotification: (ScrollNotification scrollInfo) {
-          return;
-        },
-        child: RefreshIndicator(
-          onRefresh: () async {},
-          child: CustomScrollView(
-              physics: ClampingScrollPhysics(),
-              controller: _controller,
-              slivers: <Widget>[
-                SliverAppBar(
-                  elevation: 0,
-                  automaticallyImplyLeading: false,
-                  pinned: true,
-                  backgroundColor: Colors.white,
-                  stretch: true,
-                  flexibleSpace: AppBarSpace(),
-                  expandedHeight: 300,
-                ),
-                SliverList(
-                  delegate: SliverChildListDelegate(
-                    [
-                      SizedBox(),
-                    ],
-                  ),
-                ),
-                SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index) {
-                    return testSliver(index);
-                  },
-                  childCount: 8,
-                )),
-              ]),
-        ),
-      ),
-    );
-  }
-}
-
-class AppBarSpace extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Center(child: Text('AppBarSpace')),
-    );
+    return CustomScrollView(
+        physics: ClampingScrollPhysics(),
+        controller: _controller,
+        slivers: <Widget>[
+          SliverAppBar(
+            elevation: 0,
+            automaticallyImplyLeading: false,
+            pinned: true,
+            backgroundColor: Colors.white,
+            stretch: true,
+            flexibleSpace: Center(child: Text('AppBarSpace')),
+            expandedHeight: 300,
+          ),
+          SliverList(
+              delegate: SliverChildBuilderDelegate(
+            (BuildContext context, int index) {
+              return testSliver(index);
+            },
+            childCount: 8,
+          )),
+        ]);
   }
 }
